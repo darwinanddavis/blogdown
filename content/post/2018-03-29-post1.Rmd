@@ -1,0 +1,53 @@
+---
+title: Intro to Blogdown
+author: Matt
+date: '2018-03-29'
+slug: intro-blogdown
+categories: []
+tags: [r blogdown]
+publishdate: '2018-03-29'
+draft: true
+weight: 1
+---
+
+# Common `blogdown` commands
+
+### In the YAML header:
+`draft: true`
+For rendering drafts in local preview mode  
+`publishdate: '2018-03-29'` 
+Specify a future date to publish a post. Future posts are only rendered in the local preview mode.  
+`weight: <int>`
+Assign a weight class to order posts that have the same date  
+`slug:`
+A character string as the tail of the URL.  
+
+### Shortcodes  
+
+`{{< shortcode-name param >}}`    
+To hide caption:
+`{{< shortcode-name param hidecaption >}}`  
+  
+Paired shortcodes   
+{{% mdshortcode %}}Stuff to `process` in the _center_ {{% /mdshortcode %}}  
+{{< highlight go >}} A bunch of **code** here {{< /highlight >}}
+
+Shortcode examples  
+```{r}
+blogdown::shortcode("instagram","Bghj21-Fnu7")
+```
+
+```{r}
+blogdown::shortcode('youtube', 'BWNjjyYFxVx')    
+```
+
+```{r}
+blogdown::shortcode('tweet', '852205086956818432')
+```
+
+`{{< tweet 877500564405444608 >}}`   
+`{{< vimeo 146022717 >}}`  
+`{{< figure src="/media/spf13.jpg" title="Matt's figure" >}}`  
+
+
+

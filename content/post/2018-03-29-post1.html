@@ -1,0 +1,42 @@
+---
+title: Intro to Blogdown
+author: Matt
+date: '2018-03-29'
+slug: intro-blogdown
+categories: []
+tags: [r blogdown]
+publishdate: '2018-03-29'
+draft: true
+weight: 1
+---
+
+
+
+<div id="common-blogdown-commands" class="section level1">
+<h1>Common <code>blogdown</code> commands</h1>
+<div id="in-the-yaml-header" class="section level3">
+<h3>In the YAML header:</h3>
+<p><code>draft: true</code> For rendering drafts in local preview mode<br />
+<code>publishdate: '2018-03-29'</code> Specify a future date to publish a post. Future posts are only rendered in the local preview mode.<br />
+<code>weight: &lt;int&gt;</code> Assign a weight class to order posts that have the same date<br />
+<code>slug:</code> A character string as the tail of the URL.</p>
+</div>
+<div id="shortcodes" class="section level3">
+<h3>Shortcodes</h3>
+<p><code>{{&lt; shortcode-name param &gt;}}</code><br />
+To hide caption: <code>{{&lt; shortcode-name param hidecaption &gt;}}</code></p>
+<p>Paired shortcodes<br />
+{{% mdshortcode %}}Stuff to <code>process</code> in the <em>center</em> {{% /mdshortcode %}}<br />
+{{&lt; highlight go &gt;}} A bunch of <strong>code</strong> here {{&lt; /highlight &gt;}}</p>
+<p>Shortcode examples</p>
+<pre class="r"><code>blogdown::shortcode(&quot;instagram&quot;,&quot;Bghj21-Fnu7&quot;)</code></pre>
+{{% instagram "Bghj21-Fnu7" %}}
+<pre class="r"><code>blogdown::shortcode(&#39;youtube&#39;, &#39;BWNjjyYFxVx&#39;)    </code></pre>
+{{% youtube "BWNjjyYFxVx" %}}
+<pre class="r"><code>blogdown::shortcode(&#39;tweet&#39;, &#39;852205086956818432&#39;)</code></pre>
+{{% tweet "852205086956818432" %}}
+<p><code>{{&lt; tweet 877500564405444608 &gt;}}</code><br />
+<code>{{&lt; vimeo 146022717 &gt;}}</code><br />
+<code>{{&lt; figure src=&quot;/media/spf13.jpg&quot; title=&quot;Matt's figure&quot; &gt;}}</code></p>
+</div>
+</div>
