@@ -1,0 +1,176 @@
+---
+title: Blogdown notes and intro
+author: |
+ | Matthew Malishev^1^*
+ | _^1^ Department of Biology, Emory University, 1510 Clifton Road NE, Atlanta, GA, USA, 30322_
+#bibliography:/Users/malishev/Documents/Melbourne Uni/Thesis_2016/library.bib
+fontsize: 10
+geometry: margin=1in
+documentclass: article
+linkcolor: pink
+urlcolor: blue
+citecolor: red
+output:
+  pdf_document:
+    includes:
+      in_header: # add .tex file with header content
+    highlight: tango
+    template: null
+    toc: yes
+    toc_depth: 3
+    number_sections: false
+    fig_width: 4
+    fig_height: 5
+    fig_caption: true
+    df_print: tibble 
+    citation_package: biblatex # natbib
+    latex_engine: xelatex #pdflatex # lualatex
+    keep_tex: true # keep .tex file in dir 
+  html_document:
+    highlight: tango
+    code_folding: hide
+    toc: yes
+    toc_depth: 3
+    number_sections: no
+    toc_float: yes
+  word_document:
+    highlight: tango
+    keep_md: yes
+    pandoc_args: --smart
+    #reference: mystyles.docx
+    toc: yes
+inludes:
+  before_body: before_body.tex
+subtitle: 
+tags:
+- nothing
+- nothingness
+params: 
+  dir: "/Users/malishev/Documents/Melbourne Uni/Programs/blogdown/"  #wd
+  date: !r Sys.Date()
+  version_R: !r getRversion()
+  version_hugo: !r blogdown::hugo_version() 
+  email: "matthew.malishev@gmail.com"
+  doi: https://github.com/darwinanddavis/blogdown/
+classoption: portrait
+# ^['https://github.com/darwinanddavis/blogdown'] # footnote
+vignette: >
+  %\VignetteIndexEntry{blogdown notes}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+---
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({ TeX: { equationNumbers: {autoNumber: "all"} } });
+</script>
+
+```{r, set-options, echo = FALSE, cache = FALSE}
+options(width=100)
+knitr::opts_chunk$set(
+ eval = TRUE, # run all code
+ # echo = FALSE, # show code chunks in output 
+ comment = "",
+ tidy.opts=list(width.cutoff=100), # set width of code chunks in output
+ tidy=TRUE, # make output as tidy
+ message = FALSE,  # mask all messages
+ warning = FALSE, # mask all warnings 
+ size="small"
+)
+```
+
+\  
+
+Date: `r params$date`  
+R version: `r params$version_R`   
+Hugo version: `r params$version_hugo`  
+*Corresponding author: `r params$email`  
+This document can be found at `r params$doi`  
+
+\newpage  
+
+## Overview  
+
+Notes on using `blogdown` and `hugo` for website development.  
+
+### Links  
+Guide to hugo: https://gohugo.io/getting-started/quick-start/  
+Hugo themes: https://themes.gohugo.io/  
+Intro to blogdown: https://bookdown.org/yihui/blogdown/  
+
+### Install  
+```{r, load packages, include=T, cache=T, message=F, warning=F, results='hide'}
+packages <- c("blogdown")   
+if (require(packages)) {
+    install.packages(packages,dependencies = T)
+    blogdown::install_hugo() # install hugo
+    require(packages)
+}
+lapply(packages,library,character.only=T)
+
+# -------- Hugo --------
+# check version
+blogdown::hugo_version()
+# update version. latest versions: https://github.com/gohugoio/hugo/releases
+blogdown::update_hugo()
+```
+
+### Create local root directory 
+```{r}
+setwd(params$dir)
+getwd()
+```
+
+### Set theme  
+```{r}
+# generate new site. Replaces File > New Project > Website using blogdown 
+theme <- "eddiewebb/hugo-resume"
+```
+
+### Generate site  
+```{r}
+blogdown::new_site(theme = theme)
+blogdown::build_site()
+```
+
+### Troubleshooting  
+```{r help}
+#help
+?blogdown::new_site
+```
+
+### Directories and files  
+Guide: https://bookdown.org/yihui/blogdown/a-quick-example.html  
+- config.toml: specify some global settings for your site  
+- ~ contents/: where you write the R Markdown or Markdown source files for your posts and pages  
+- ~public/: The publishing directory (by default, public/). Your website will be generated to this directory   
+
+### Live preview  
+```{r}
+blogdown::serve_site()
+```
+
+### Globals
+- blogdown.subdir: A subdirectory under content/  
+- blogdown.yaml.empty:	Preserve empty fields in YAML?  
+- options(blogdown.author = 'Matt Malishev', blogdown.ext = 'Rmd')  
+
+### Create new post
+```{r}
+# posts appear under ~/content/post/
+blogdown:::new_post_addin() # create new post
+blogdown:::update_meta_addin() # update post metadata 
+```
+
+### Publish site  
+```{r}
+# creates ~public/ dir
+blogdown::hugo_build() 
+```
+
+### Next steps  
+1. Create a new site on Netlify from your GitHub repository that contains the source files of your website   
+
+
+
+
+
